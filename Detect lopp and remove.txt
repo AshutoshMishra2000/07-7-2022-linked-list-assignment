@@ -1,0 +1,57 @@
+class Solution
+{
+    //Function to remove a loop in the linked list.
+    public static Node DetectCycle(Node head){
+        if(head==null){
+            return null;
+        }
+        
+        Node hare=head;
+        Node turtle=head;
+        while(hare!=null&&hare.next!=null){
+            hare=hare.next.next;
+            turtle=turtle.next;
+            
+            if(hare==turtle){
+                return turtle;
+            }
+        }
+        return null;
+    }
+    
+    //for the first node in the loop
+    
+    public static Node firstNode(Node head){
+        if(head==null){
+            return null;
+        }
+        
+        Node slow=DetectCycle(head);
+        if(slow==null){
+            return null;
+        }
+        
+        Node temp=slow;
+        slow=head;
+        while(temp!=slow){
+            slow=slow.next;
+            temp=temp.next;
+        }
+        return slow;
+    }
+    public static void removeLoop(Node head){
+        if(head==null){
+            return;
+        }
+        
+        Node temp=firstNode(head);
+        if(temp==null){
+            return;
+        }
+        Node temp1=temp;
+        while(temp.next!=temp1){
+     temp=temp.next;
+    }
+    temp.next=null;
+}
+}

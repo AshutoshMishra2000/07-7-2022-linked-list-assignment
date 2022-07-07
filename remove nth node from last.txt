@@ -1,0 +1,34 @@
+class Solution {
+    int size(ListNode head){
+        int size=0;
+        while(head!=null){
+            head=head.next;
+            size++;
+        }
+        return size;
+    }
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        if(head.next==null){
+            return null;
+        }
+        
+        int len=size(head);
+        //if n is equal to the size of linked list then we have to return head.next after deleting head node
+        if(n==len){
+            return head.next;
+        }
+       // int nthNode=size-n+1;//these are the basically the index value that we want...
+        int indexToSearch=len-n;//that we want to linked to other node
+        int i=1;
+        ListNode prev=head;
+        while(i<indexToSearch){
+            prev=prev.next;
+            i++;
+        }
+        
+        prev.next=prev.next.next;
+        return head;
+    
+        
+    }
+}
